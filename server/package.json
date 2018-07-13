@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "wwstay challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyrierose/wwstay-app.git"
+  },
+  "author": "Akshit Dhar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyrierose/wwstay-app/issues"
+  },
+  "homepage": "https://github.com/kyrierose/wwstay-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
