@@ -14,7 +14,7 @@ mongoose.connect(db_uri, err =>{
 })
 
 router.get('/', (req,res)=>{
-    res.send("From api route");
+    res.send("Reached API home");
 });
 
 //Defining registration endpoint
@@ -51,9 +51,11 @@ router.post('/login',(req, res)=>{
         }
     });
 });
+
 // Defining secured expense manager
 router.get('/expenses', (req,res)=>{
-    res.send('Expenses align up here');
+    //returns user's expenses array
+    res.json(User.expenses);
 });
 
 export default router;
