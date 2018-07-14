@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 //Material UI Imports
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule } from '@angular/material';
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
     MatTableModule, 
     MatDividerModule, 
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule, 
+    MatSortModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
