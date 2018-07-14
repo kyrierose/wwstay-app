@@ -53,4 +53,10 @@ export class ExpensesComponent implements OnInit {
     return sum;
   }
 
+  //Edit Expense
+  editExpense(_id){}
+
+  //Delete Expense
+  deleteExpense(_id){
+  }
 }

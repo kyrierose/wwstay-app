@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 //Material UI Imports
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { CreateComponent } from './create/create.component';
+import { CrudService } from './crud.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CreateComponent } from './create/create.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -40,7 +42,7 @@ import { CreateComponent } from './create/create.component';
     MatPaginatorModule, 
     MatSortModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, CrudService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

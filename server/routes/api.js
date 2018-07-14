@@ -49,10 +49,24 @@ router.post('/login',(req, res)=>{
     });
 });
 
-// Defining secured expense manager
-router.get('/expenses', (req,res)=>{
+// adding a new expense
+router.post('/create', (req,res)=>{
     //returns user's expenses array
-    
+    User.findOne({email: req.body.email}, (err, user)=>{
+        if(err)
+            console.log(err)
+        else{
+            let expenseObject = req.body.expense;
+            const _id = mongoose.Types.ObjectId()
+            expenseObject._id = _id;
+            user.expenses.push(expenseObject);
+            user.save();
+            //sending complete object
+            res.status(200).send(user);
+        }
+    })
 });
+
+//updating a expense
 
 export default router;
