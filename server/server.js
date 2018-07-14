@@ -1,6 +1,7 @@
 //Main imports
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 //File Imports
 import api from './routes/api';
@@ -10,7 +11,10 @@ const app = express();
 
 //responses from api route
 app.use('/api',api);
+
+//Using middlewares
 app.use(bodyParser.json());
+app.use(cors());
 
 //Handles landing page
 app.get('/',(req, res)=>{
