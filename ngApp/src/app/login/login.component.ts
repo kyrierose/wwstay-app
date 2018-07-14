@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     .subscribe(
       res => {
         this.populateExpensesArray(res['expenses']);
-        this.crud.setLoginUserData(this.loginUserData);
+        this.crud.setLoginUserData(res);
         this.route.navigate(['/expenses']);
       },
       err => console.log(err)

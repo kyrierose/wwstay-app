@@ -13,13 +13,16 @@ import { AuthService } from './auth.service';
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { CreateComponent } from './create/create.component';
 import { CrudService } from './crud.service';
+import { DummyComponent } from './dummy/dummy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,  
-    ExpensesComponent, CreateComponent
+    ExpensesComponent, 
+    CreateComponent, 
+    DummyComponent
   ],
   imports: [
     BrowserModule,

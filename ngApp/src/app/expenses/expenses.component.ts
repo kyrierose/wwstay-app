@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { ExpService } from '../exp.service';
 import { Router } from '@angular/router';
 import { MatSort, MatTableDataSource} from '@angular/material';
+import { CrudService } from '../crud.service';
 
 export interface UserData {
   _id: String,
@@ -25,7 +26,7 @@ export class ExpensesComponent implements OnInit {
   expensesArray = []
   total_expenses = 0
 
-  constructor(private exp: ExpService, private route:Router) {
+  constructor(private exp: ExpService, private route:Router, private crud: CrudService) {
     //initialises expensesArray instance
     this.expensesArray = this.exp.getExpenseArray();
     this.dataSource = new MatTableDataSource(this.expensesArray);
@@ -54,9 +55,21 @@ export class ExpensesComponent implements OnInit {
   }
 
   //Edit Expense
-  editExpense(_id){}
+  editExpense(_id){
+  
+  }
 
   //Delete Expense
   deleteExpense(_id){
+    this.crud.deleteExpense(_id).subscribe(
+      res=>{
+        this.crud.setLoginUserData(res);
+        this.exp.setExpenseArray(res['expenses'])
+        //refreshing the expenses component
+        this.route.navigateByUrl('/dummy', {skipLocationChange: true}).then(()=>
+        this.route.navigate(["/expenses"]));
+      },
+      err=>console.log(err)
+    );
   }
 }

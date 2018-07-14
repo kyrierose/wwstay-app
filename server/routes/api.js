@@ -51,7 +51,7 @@ router.post('/login',(req, res)=>{
 
 // adding a new expense
 router.post('/create', (req,res)=>{
-    //returns user's expenses array
+    //appends the new entry
     User.findOne({email: req.body.email}, (err, user)=>{
         if(err)
             console.log(err)
@@ -69,4 +69,19 @@ router.post('/create', (req,res)=>{
 
 //updating a expense
 
+
+//Deleting a expense
+router.post('/delete',(req,res)=>{
+    User.findOne({email: req.body.email}, (err, user)=>{
+        if(err)
+            console.log(err)
+        else{
+            let expense_id = req.body.expense_id;
+            user.expenses.id(expense_id).remove();
+            user.save();
+            //sending complete object
+            res.status(200).send(user);
+        }
+    });
+})
 export default router;

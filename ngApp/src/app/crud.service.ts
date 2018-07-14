@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ExpService } from './exp.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class CrudService {
 
   private addUri = "http://localhost:3000/api/create";
+  private delUri = "http://localhost:3000/api/delete";
   private loginUserData = {}
 
   constructor(private http: HttpClient) { }
@@ -29,5 +30,13 @@ export class CrudService {
       } 
     }
     return this.http.post(this.addUri, expenseObject);
+  }
+
+  deleteExpense(_id){
+    let deleteObject = {
+      email: this.loginUserData['email'],
+      expense_id: _id 
+    };
+    return this.http.post(this.delUri, deleteObject);
   }
 }

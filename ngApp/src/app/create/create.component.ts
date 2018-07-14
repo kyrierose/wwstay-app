@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from '../crud.service';
-import { ExpensesComponent } from '../expenses/expenses.component';
 import { ExpService } from '../exp.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class CreateComponent implements OnInit {
 
   createForm: FormGroup;
 
-  constructor(private route: Router, private crud: CrudService, private formBuilder: FormBuilder, private exp: ExpService) {
+  constructor(private router: Router, private crud: CrudService, private formBuilder: FormBuilder, private exp: ExpService) {
     this.createForm = this.formBuilder.group({
       expense_name: ['', Validators.required],
       price: ['', Validators.required]
@@ -29,11 +28,12 @@ export class CreateComponent implements OnInit {
     this.crud.addNewExpense(expense_name,price).subscribe(
       res=>{
         this.exp.setExpenseArray(res['expenses'])
-        this.route.navigate['/expenses']
+        this.crud.setLoginUserData(res)
+        //switching to expenses page
+        this.router.navigate(['/expenses']);
       },
       err=> console.log(err)
     );
-    
   }
 
 }
