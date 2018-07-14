@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { ExpService } from '../exp.service';
 import { Router } from '@angular/router';
 import { MatSort, MatTableDataSource} from '@angular/material';
@@ -22,18 +22,33 @@ export class ExpensesComponent implements OnInit {
 
   //populate this array after user login 
   expensesArray = []
+  total_expenses = 0
 
   constructor(private exp: ExpService, private route:Router) {
+    //initialises expensesArray instance
     this.expensesArray = this.exp.getExpenseArray();
     this.dataSource = new MatTableDataSource(this.expensesArray);
   }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    //initialising total_expense 
+    this.total_expenses = this.getTotalExpenses();
+    
   }
 
+//Filter function for expenses
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+//calculates the total expenses 
+  getTotalExpenses(){
+    let sum = 0;
+    for (var i = 0; i < this.expensesArray.length; i++) {
+        sum+= this.expensesArray[i].price;
+    }
+    return sum;
   }
 
 }
