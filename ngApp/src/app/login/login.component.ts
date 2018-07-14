@@ -18,8 +18,14 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this._auth.loginUser(this.loginUserData)
     .subscribe(
-      res => console.log(res),
+      res => {
+        this.populateExpensesArray(res.expenses);
+      },
       err => console.log(err)
     );
+  }
+
+  populateExpensesArray(expensesArray){
+    
   }
 }

@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./expenses.component.css']
 })
 export class ExpensesComponent implements OnInit {
+  
+  //populate this array after user login 
+  expensesArray = []
 
   constructor() { }
 

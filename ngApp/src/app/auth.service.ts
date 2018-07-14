@@ -18,4 +18,10 @@ export class AuthService {
   loginUser(user){
     return this.http.post<any>(this._loginUrl, user);
   }
+
+  //Seperate service
+  private _expenseUrl = "http://localhost:3000/api/expenses";
+  getExpense(user){
+    return this.http.post<any>(this._expenseUrl, user);
+  }
 }
