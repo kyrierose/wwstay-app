@@ -11,13 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
 //Material UI Imports
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,  
-    ExpensesComponent
+    ExpensesComponent, CreateComponent
   ],
   imports: [
     BrowserModule,

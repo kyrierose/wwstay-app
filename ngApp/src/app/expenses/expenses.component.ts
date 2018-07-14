@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSort, MatTableDataSource} from '@angular/material';
 
 export interface UserData {
+  _id: String,
   expense_name: String,
   price: Number
 };
@@ -15,7 +16,7 @@ export interface UserData {
 })
 export class ExpensesComponent implements OnInit {
 
-  displayedColumns: string[] = ['expense_name','price'];
+  displayedColumns: string[] = ['expense_name','price', 'action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -28,25 +29,26 @@ export class ExpensesComponent implements OnInit {
     //initialises expensesArray instance
     this.expensesArray = this.exp.getExpenseArray();
     this.dataSource = new MatTableDataSource(this.expensesArray);
+    //Initialising total_expenses of expensesArray
+    this.total_expenses = this.getTotalExpenses(this.expensesArray);
   }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    //initialising total_expense 
-    this.total_expenses = this.getTotalExpenses();
-    
   }
 
 //Filter function for expenses
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    //update total expenses dynamically with filter
+    this.total_expenses = this.getTotalExpenses(this.dataSource.filteredData);
   }
 
 //calculates the total expenses 
-  getTotalExpenses(){
+  getTotalExpenses(array){
     let sum = 0;
-    for (var i = 0; i < this.expensesArray.length; i++) {
-        sum+= this.expensesArray[i].price;
+    for (var i = 0; i < array.length; i++) {
+        sum+= array[i].price;
     }
     return sum;
   }

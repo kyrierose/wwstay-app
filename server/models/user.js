@@ -10,6 +10,7 @@ const imageSchema = new Schema({
 
 //Define expense schema
 const expenseSchema = new Schema({
+    _id: String,
     expense_name: String,
     price: Number,
     //timestamp: Date,
