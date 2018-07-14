@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class ExpService {
 
   private expensesArray = []
+  private expenseUpdateObject = {}
 
   constructor(private route: Router) { }
 
@@ -20,5 +21,16 @@ export class ExpService {
 
   clearExpensesArray(){
     this.expensesArray = [];
+  }
+
+  getUpdatedExpenseObject(){
+    return this.expenseUpdateObject;
+  }
+
+  setExpenseObjectById(_id){
+    for (var i = 0; i < this.expensesArray.length; i++) {
+        if(this.expensesArray[i]._id === _id)
+          this.expenseUpdateObject = this.expensesArray[i];
+    }
   }
 }

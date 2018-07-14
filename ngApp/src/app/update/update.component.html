@@ -1,0 +1,21 @@
+<div>
+  <br>
+  <mat-card>
+    <section class="mat-typography">
+      <h3>Update the expense</h3>
+    </section>
+    <mat-divider></mat-divider>
+    <br>
+    <form [formGroup]= "updateForm" class="update-form">
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Expense Name" formControlName="expense_name" #expense_name>
+      </mat-form-field>
+      <mat-form-field class="field-full-width">
+        <input matInput placeholder="Price" formControlName="price" #price>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <br><br>
+      <button type="submit" (click)="updateExpense(expense_name.value, price.value)" [disabled]="updateForm.pristine || updateForm.invalid" mat-raised-button color="primary">Save</button>
+    </form>
+  </mat-card>
+</div>

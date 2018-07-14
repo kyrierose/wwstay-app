@@ -14,6 +14,7 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
 import { CreateComponent } from './create/create.component';
 import { CrudService } from './crud.service';
 import { DummyComponent } from './dummy/dummy.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DummyComponent } from './dummy/dummy.component';
     LoginComponent,  
     ExpensesComponent, 
     CreateComponent, 
-    DummyComponent
+    DummyComponent, 
+    UpdateComponent
   ],
   imports: [
     BrowserModule,

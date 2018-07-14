@@ -54,9 +54,11 @@ export class ExpensesComponent implements OnInit {
     return sum;
   }
 
-  //Edit Expense
-  editExpense(_id){
-  
+  //Update Expense
+  updateExpense(_id){
+    //setting the update object and navigating to update component
+    this.exp.setExpenseObjectById(_id);
+    this.route.navigate(['/update']);
   }
 
   //Delete Expense

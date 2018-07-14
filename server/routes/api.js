@@ -68,7 +68,20 @@ router.post('/create', (req,res)=>{
 });
 
 //updating a expense
-
+router.post('/update',(req,res)=>{
+    User.findOne({email:req.body.email}, (err, user)=>{
+        if(err)
+            console.log(err)
+        else{
+            let expenseObj = req.body.expense;
+            user.expenses.id(expenseObj._id).remove()//Remove old entry 
+            user.expenses.push(expenseObj)//Push new entry
+            user.save()
+            //sending complete object
+            res.status(200).send(user);
+        }
+    })
+});
 
 //Deleting a expense
 router.post('/delete',(req,res)=>{

@@ -9,6 +9,8 @@ export class CrudService {
 
   private addUri = "http://localhost:3000/api/create";
   private delUri = "http://localhost:3000/api/delete";
+  private upUri = "http://localhost:3000/api/update";
+  
   private loginUserData = {}
 
   constructor(private http: HttpClient) { }
@@ -38,5 +40,14 @@ export class CrudService {
       expense_id: _id 
     };
     return this.http.post(this.delUri, deleteObject);
+  }
+
+  updateExpense(expense_modified){
+    let expenseObj = {
+      email: this.loginUserData['email'],
+      expense: expense_modified
+    }
+
+    return this.http.post(this.upUri, expenseObj);
   }
 }

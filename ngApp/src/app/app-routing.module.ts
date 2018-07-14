@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateComponent } from './create/create.component';
 import { DummyComponent } from './dummy/dummy.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   { path:"expenses", component:ExpensesComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path:'register', component:RegisterComponent},
   { path:'create', component:CreateComponent},
   { path:'dummy', component:DummyComponent},
+  { path:'update', component:UpdateComponent},
   { path:'', redirectTo:"/login", pathMatch:'full'}
 ];
 
