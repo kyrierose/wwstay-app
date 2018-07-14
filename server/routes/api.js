@@ -52,7 +52,7 @@ router.post('/login',(req, res)=>{
 // Defining secured expense manager
 router.get('/expenses', (req,res)=>{
     //returns user's expenses array
-    res.json(User.expenses);
+    
 });
 
 export default router;
