@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExpService } from '../exp.service';
 import { Router } from '@angular/router';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatSort, MatTableDataSource} from '@angular/material';
 
 export interface UserData {
   expense_name: String,
@@ -18,7 +18,6 @@ export class ExpensesComponent implements OnInit {
   displayedColumns: string[] = ['expense_name','price'];
   dataSource: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   //populate this array after user login 
@@ -31,15 +30,10 @@ export class ExpensesComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
 }
