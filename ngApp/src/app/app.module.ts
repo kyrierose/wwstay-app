@@ -9,7 +9,8 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.service';
-
+//Material UI Imports
+import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,19 @@ import { AuthService } from './auth.service';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatOptionModule, 
+    MatSelectModule, 
+    MatIconModule, 
+    MatButtonModule, 
+    MatCardModule, 
+    MatTableModule, 
+    MatDividerModule, 
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
