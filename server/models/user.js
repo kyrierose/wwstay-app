@@ -19,8 +19,8 @@ const expenseSchema = new Schema({
 const userSchema = new Schema({
     email: String,
     password: String,
-    expenses : [expenseSchema]
-});
+    expenses: [expenseSchema] 
+}, { strict: false});
 
 //third parameter specifies the collection name 
 export default mongoose.model('user', userSchema, 'users');
