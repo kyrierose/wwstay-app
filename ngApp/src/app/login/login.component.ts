@@ -11,6 +11,7 @@ import { CrudService } from '../crud.service';
 })
 export class LoginComponent implements OnInit {
 
+  private credentials = "Developed By Akshit Dhar"
   loginUserData = {};
 
   constructor(private _auth: AuthService, private route: Router, private exp:ExpService, private crud: CrudService) { }
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
         this.crud.setLoginUserData(res);
         this.route.navigate(['/expenses']);
       },
-      err => console.log(err)
+      err => console.log("Login Failed")
     );
   }
 

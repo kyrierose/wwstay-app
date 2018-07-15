@@ -26,8 +26,9 @@ router.post('/register', (req, res) => {
         console.log(err)      
       } else {
         //Remove password key for security reasons
-        user.password = undefined
-        res.status(200).json(user);  
+        let response = user
+        response.password = undefined
+        res.status(200).json(response);  
       }
     })
 })
@@ -35,20 +36,21 @@ router.post('/register', (req, res) => {
 //Defining login endpoint
 router.post('/login',(req, res)=>{
     //Storing request paramters
-    let userData = req.body;
+    const userData = req.body;
 
     User.findOne({email : userData.email}, (err, user)=>{
         if(err)
             console.log(err);
         else{
             if(!user)
-                res.status(401).send("Invalid Email");
+                res.status(401).send("No user found!");
             else if(userData.password !== user.password)
                 res.status(401).send("Invalid Password");
             else{
                 //Remove password key for security reasons
-                user.password = undefined
-                res.status(200).json(user);            
+                let response = user
+                response.password = undefined
+                res.status(200).json(response);            
             }
         }
     });
@@ -57,19 +59,26 @@ router.post('/login',(req, res)=>{
 // adding a new expense
 router.post('/create', (req,res)=>{
     //appends the new entry
-    User.findOne({email: req.body.email}, (err, user)=>{
+    const userData = req.body;
+    User.findOne({email: userData.email}, (err, user)=>{
         if(err)
             console.log(err)
         else{
-            let expenseObject = req.body.expense;
+            let expenseObject = userData.expense;
             const _id = mongoose.Types.ObjectId()
             expenseObject._id = _id;
             user.expenses.push(expenseObject);
-            user.save();
-            //sending complete object
-            //Remove password key for security reasons
-            user.password = undefined
-            res.status(200).json(user);  
+            user.save((err, registeredUser) => {
+                if (err) {
+                  console.log(err)      
+                } else {
+                    //sending complete object
+                    //Remove password key for security reasons
+                    let response = user
+                    response.password = undefined
+                    res.status(200).json(response);   
+                }
+            })
         }
     })
 });
@@ -83,11 +92,17 @@ router.post('/update',(req,res)=>{
             let expenseObj = req.body.expense;
             user.expenses.id(expenseObj._id).remove()//Remove old entry 
             user.expenses.push(expenseObj)//Push new entry
-            user.save()
-            //sending complete object
-            //Remove password key for security reasons
-            user.password = undefined
-            res.status(200).json(user);  
+            user.save((err, registeredUser) => {
+                if (err) {
+                  console.log(err)      
+                } else {
+                    //sending complete object
+                    //Remove password key for security reasons
+                    let response = user
+                    response.password = undefined
+                    res.status(200).json(response);   
+                }
+            }) 
         }
     })
 });
@@ -100,11 +115,17 @@ router.post('/delete',(req,res)=>{
         else{
             let expense_id = req.body.expense_id;
             user.expenses.id(expense_id).remove();
-            user.save();
-            //sending complete object
-            //Remove password key for security reasons
-            user.password = undefined
-            res.status(200).json(user);  
+            user.save((err, registeredUser) => {
+                if (err) {
+                  console.log(err)      
+                } else {
+                    //sending complete object
+                    //Remove password key for security reasons
+                    let response = user
+                    response.password = undefined
+                    res.status(200).json(response);   
+                }
+            })
         }
     });
 })

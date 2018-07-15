@@ -24,6 +24,10 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
+  backToExpenses(){
+    this.router.navigate(['/expenses'])
+  }
+
   addExpense(expense_name, price){
     //generate date string
     const timestamp = new Date().toUTCString();  

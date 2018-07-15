@@ -26,6 +26,10 @@ export class UpdateComponent implements OnInit {
   ngOnInit() {
   }
 
+  backToExpenses(){
+    this.route.navigate(['/expenses'])
+  }
+
   updateExpense(expense_name, price){
     this.expenseObject['expense_name'] = expense_name
     this.expenseObject['price'] = price
