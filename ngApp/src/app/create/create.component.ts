@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from '../crud.service';
 import { ExpService } from '../exp.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create',
@@ -12,12 +13,14 @@ import { ExpService } from '../exp.service';
 export class CreateComponent implements OnInit {
 
   createForm: FormGroup;
-  imageFile : File = null
+  selectedFile: File = null;
+  fd = new FormData();
 
-  constructor(private router: Router, private crud: CrudService, private formBuilder: FormBuilder, private exp: ExpService) {
+  constructor(private http:HttpClient, private router: Router, private crud: CrudService, private formBuilder: FormBuilder, private exp: ExpService) {
     this.createForm = this.formBuilder.group({
       expense_name: ['', Validators.required],
-      price: ['', Validators.required]
+      price: ['', Validators.required],
+      image: [null]
     });
   }
 
@@ -31,12 +34,12 @@ export class CreateComponent implements OnInit {
   addExpense(expense_name, price){
     //generate date string
     const timestamp = new Date().toUTCString();  
-    //Passing file even if its empty
     //updates the local expenses array
     this.crud.addNewExpense(expense_name,price, timestamp).subscribe(
       res=>{
         this.exp.setExpenseArray(res['expenses'])
         this.crud.setLoginUserData(res)
+        this.uploadImage()
         //switching to expenses page
         this.router.navigate(['/expenses']);
       },
@@ -45,10 +48,15 @@ export class CreateComponent implements OnInit {
   }
 
   fileChange(event) {
-    let fileList: FileList = event.target.files;
-    if(fileList.length > 0) {
-        let file: File = fileList[0];
-        this.imageFile = file;
-    }
-}
+    this.selectedFile = <File>event.target.files[0];
+    this.fd.append('file', this.selectedFile, this.selectedFile.name);
+  }
+
+  //Uploading Image
+  uploadImage(){
+    this.http.post("http://localhost:3000/api/image", this.fd)
+    .subscribe( result => {
+      console.log(result)
+    });
+  }
 }

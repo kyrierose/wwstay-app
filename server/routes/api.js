@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from '../models/user';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -25,6 +26,9 @@ router.post('/register', (req, res) => {
       if (err) {
         console.log(err)      
       } else {
+        //Generating token
+        let payload = { subject: registeredUser._id}
+        let token = jwt.sign(payload, 'secretKey');
         //Remove password key for security reasons
         let response = user
         response.password = undefined
@@ -128,5 +132,9 @@ router.post('/delete',(req,res)=>{
             })
         }
     });
+})
+
+router.post('/image', (req, res)=>{
+    //For image Storing
 })
 export default router;

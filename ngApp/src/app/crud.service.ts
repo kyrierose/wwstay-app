@@ -48,7 +48,6 @@ export class CrudService {
       email: this.loginUserData['email'],
       expense: expense_modified
     }
-
     return this.http.post(this.upUri, expenseObj);
   }
 }

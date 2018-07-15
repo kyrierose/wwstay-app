@@ -12,6 +12,7 @@ const app = express();
 //Use middlewares before routing
 app.use(cors()); // For matching front-end port to back-end port
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //responses from api route
 app.use('/api',api);
