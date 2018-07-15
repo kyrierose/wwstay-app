@@ -12,6 +12,7 @@ import { ExpService } from '../exp.service';
 export class CreateComponent implements OnInit {
 
   createForm: FormGroup;
+  imageFile : File = null
 
   constructor(private router: Router, private crud: CrudService, private formBuilder: FormBuilder, private exp: ExpService) {
     this.createForm = this.formBuilder.group({
@@ -25,7 +26,8 @@ export class CreateComponent implements OnInit {
 
   addExpense(expense_name, price){
     //generate date string
-    const timestamp = new Date().toUTCString();
+    const timestamp = new Date().toUTCString();  
+    //Passing file even if its empty
     //updates the local expenses array
     this.crud.addNewExpense(expense_name,price, timestamp).subscribe(
       res=>{
@@ -38,4 +40,11 @@ export class CreateComponent implements OnInit {
     );
   }
 
+  fileChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        let file: File = fileList[0];
+        this.imageFile = file;
+    }
+}
 }

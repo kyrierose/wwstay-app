@@ -25,7 +25,9 @@ router.post('/register', (req, res) => {
       if (err) {
         console.log(err)      
       } else {
-        console.log(registeredUser)
+        //Remove password key for security reasons
+        user.password = undefined
+        res.status(200).json(user);  
       }
     })
 })
@@ -43,8 +45,11 @@ router.post('/login',(req, res)=>{
                 res.status(401).send("Invalid Email");
             else if(userData.password !== user.password)
                 res.status(401).send("Invalid Password");
-            else
-                res.status(200).json(user);
+            else{
+                //Remove password key for security reasons
+                user.password = undefined
+                res.status(200).json(user);            
+            }
         }
     });
 });
@@ -62,7 +67,9 @@ router.post('/create', (req,res)=>{
             user.expenses.push(expenseObject);
             user.save();
             //sending complete object
-            res.status(200).send(user);
+            //Remove password key for security reasons
+            user.password = undefined
+            res.status(200).json(user);  
         }
     })
 });
@@ -78,7 +85,9 @@ router.post('/update',(req,res)=>{
             user.expenses.push(expenseObj)//Push new entry
             user.save()
             //sending complete object
-            res.status(200).send(user);
+            //Remove password key for security reasons
+            user.password = undefined
+            res.status(200).json(user);  
         }
     })
 });
@@ -93,7 +102,9 @@ router.post('/delete',(req,res)=>{
             user.expenses.id(expense_id).remove();
             user.save();
             //sending complete object
-            res.status(200).send(user);
+            //Remove password key for security reasons
+            user.password = undefined
+            res.status(200).json(user);  
         }
     });
 })
