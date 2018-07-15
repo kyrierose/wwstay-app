@@ -158,7 +158,4 @@ router.post('/delete', verifyToken, (req,res)=>{
     });
 })
 
-router.post('/image', (req, res)=>{
-    //For image Storing
-})
 export default router;

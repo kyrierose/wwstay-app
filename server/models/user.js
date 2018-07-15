@@ -2,19 +2,12 @@ import mongoose from 'mongoose';
 //ES6 destructuring
 const {Schema} = mongoose;
 
-//Define image schema
-const imageSchema = new Schema({
-    data: Buffer, 
-    contentType: String
-});
-
 //Define expense schema
 const expenseSchema = new Schema({
     _id: String,
     expense_name: String,
     price: Number,
-    timestamp: String, //String works as well as Date object
-    image: imageSchema
+    timestamp: String //String works as well as Date object
 });
 
 const userSchema = new Schema({
