@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from '../crud.service';
 import { ExpService } from '../exp.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update',
@@ -41,7 +42,12 @@ export class UpdateComponent implements OnInit {
         this.exp.setExpenseArray(res['expenses'])
         this.route.navigate(['/expenses'])
       },
-      err=>console.log(err)
+      err=>{
+        if(err instanceof HttpErrorResponse){
+          if(err.status === 401)
+            this.route.navigate(['/login']);
+        }
+      }
     );
   }
 

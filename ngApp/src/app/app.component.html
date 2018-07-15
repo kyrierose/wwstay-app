@@ -6,8 +6,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <li class="nav-item"></li>    
       <ul class="navbar-nav mr-auto">
-          <a class="nav-link"  routerLink="/login" routerLinkActive="active">Login</a>
-          <a class="nav-link"  routerLink="/register" routerLinkActive="active">Register</a>
+          <a class="nav-link" *ngIf="!_authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" *ngIf="!_authService.isLoggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+          <a class="nav-link" style="cursor: pointer;" *ngIf="_authService.isLoggedIn()" (click)="_authService.logoutUser();">Logout</a>
       </ul>
     </div>
   </nav>    

@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './auth.service';
 //Material UI Imports
 import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
@@ -16,6 +16,7 @@ import { CrudService } from './crud.service';
 import { DummyComponent } from './dummy/dummy.component';
 import { UpdateComponent } from './update/update.component';
 import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,11 @@ import { AuthGuard } from './auth.guard';
     MatPaginatorModule, 
     MatSortModule
   ],
-  providers: [AuthService, CrudService, AuthGuard],
+  providers: [AuthService, CrudService, AuthGuard, {
+    provide : HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

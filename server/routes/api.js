@@ -14,6 +14,23 @@ mongoose.connect(db_uri, err =>{
         console.log('Connected to mongodb');
 })
 
+function verifyToken(req, res, next) {
+    console.log("called")
+    if(!req.headers.authorization) {
+      return res.status(401).send('Unauthorized request')
+    }
+    let token = req.headers.authorization.split(' ')[1]
+    if(token === 'null') {
+      return res.status(401).send('Unauthorized request')    
+    }
+    let payload = jwt.verify(token, 'secretKey')
+    if(!payload) {
+      return res.status(401).send('Unauthorized request')    
+    }
+    req.userId = payload.subject
+    next()
+  }
+
 router.get('/', (req,res)=>{
     res.send("Reached API home");
 });
@@ -68,7 +85,7 @@ router.post('/login',(req, res)=>{
 });
 
 // adding a new expense
-router.post('/create', (req,res)=>{
+router.post('/create', verifyToken, (req,res)=>{
     //appends the new entry
     const userData = req.body;
     User.findOne({email: userData.email}, (err, user)=>{
@@ -95,7 +112,7 @@ router.post('/create', (req,res)=>{
 });
 
 //updating a expense
-router.post('/update',(req,res)=>{
+router.post('/update', verifyToken, (req,res)=>{
     User.findOne({email:req.body.email}, (err, user)=>{
         if(err)
             console.log(err)
@@ -119,7 +136,7 @@ router.post('/update',(req,res)=>{
 });
 
 //Deleting a expense
-router.post('/delete',(req,res)=>{
+router.post('/delete', verifyToken, (req,res)=>{
     User.findOne({email: req.body.email}, (err, user)=>{
         if(err)
             console.log(err)

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CrudService } from '../crud.service';
 import { ExpService } from '../exp.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-create',
@@ -43,7 +43,12 @@ export class CreateComponent implements OnInit {
         //switching to expenses page
         this.router.navigate(['/expenses']);
       },
-      err=> console.log(err)
+      err=>{
+        if(err instanceof HttpErrorResponse){
+          if(err.status === 401)
+            this.router.navigate(['/login']);
+        }
+      }
     );
   }
 
