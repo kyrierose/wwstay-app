@@ -4,8 +4,8 @@ const {Schema} = mongoose;
 
 //Define image schema
 const imageSchema = new Schema({
-    name: String,
-    url: String
+    data: Buffer, 
+    contentType: String
 });
 
 //Define expense schema
@@ -14,7 +14,7 @@ const expenseSchema = new Schema({
     expense_name: String,
     price: Number,
     timestamp: String, //String works as well as Date object
-    //image: imageSchema
+    image: imageSchema
 });
 
 const userSchema = new Schema({
