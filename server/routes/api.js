@@ -30,9 +30,11 @@ router.post('/register', (req, res) => {
         let payload = { subject: registeredUser._id}
         let token = jwt.sign(payload, 'secretKey');
         //Remove password key for security reasons
-        let response = user
+        let response = JSON.parse(JSON.stringify(user)); //creates a perfect object
         response.password = undefined
-        res.status(200).json(response);  
+        //appending token to response object
+        response.token = token
+        res.status(200).json(response);
       }
     })
 })
@@ -51,10 +53,15 @@ router.post('/login',(req, res)=>{
             else if(userData.password !== user.password)
                 res.status(401).send("Invalid Password");
             else{
+                //generate token
+                let payload = { subject: user._id}
+                const token = jwt.sign(payload, 'secretKey');
                 //Remove password key for security reasons
-                let response = user
+                let response = JSON.parse(JSON.stringify(user));
                 response.password = undefined
-                res.status(200).json(response);            
+                //appending token to response object
+                response.token = token
+                res.status(200).json(response);              
             }
         }
     });

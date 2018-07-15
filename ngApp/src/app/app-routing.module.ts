@@ -6,14 +6,15 @@ import { RegisterComponent } from './register/register.component';
 import { CreateComponent } from './create/create.component';
 import { DummyComponent } from './dummy/dummy.component';
 import { UpdateComponent } from './update/update.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path:"expenses", component:ExpensesComponent},
+  { path:"expenses", component:ExpensesComponent, canActivate:[AuthGuard]},
   { path:"login", component:LoginComponent},
   { path:'register', component:RegisterComponent},
-  { path:'create', component:CreateComponent},
+  { path:'create', component:CreateComponent, canActivate:[AuthGuard]},
   { path:'dummy', component:DummyComponent},
-  { path:'update', component:UpdateComponent},
+  { path:'update', component:UpdateComponent, canActivate:[AuthGuard]},
   { path:'', redirectTo:"/login", pathMatch:'full'}
 ];
 

@@ -15,6 +15,7 @@ import { CreateComponent } from './create/create.component';
 import { CrudService } from './crud.service';
 import { DummyComponent } from './dummy/dummy.component';
 import { UpdateComponent } from './update/update.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { UpdateComponent } from './update/update.component';
     MatPaginatorModule, 
     MatSortModule
   ],
-  providers: [AuthService, CrudService],
+  providers: [AuthService, CrudService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

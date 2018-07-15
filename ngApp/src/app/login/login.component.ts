@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       res => {
+        //storing token locally
+        localStorage.setItem('token', res['token']);
         this.populateExpensesArray(res['expenses']);
         this.crud.setLoginUserData(res);
         this.route.navigate(['/expenses']);
