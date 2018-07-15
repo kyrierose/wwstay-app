@@ -23,12 +23,13 @@ export class CrudService {
     return this.loginUserData;
   }
 
-  addNewExpense(expense_name, price){
+  addNewExpense(expense_name, price, timestamp){
     let expenseObject = {
       email: this.loginUserData['email'],
       expense:{
         expense_name: expense_name,
-        price: price
+        price: price,
+        timestamp: timestamp
       } 
     }
     return this.http.post(this.addUri, expenseObject);

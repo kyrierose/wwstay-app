@@ -13,7 +13,7 @@ const expenseSchema = new Schema({
     _id: String,
     expense_name: String,
     price: Number,
-    //timestamp: Date,
+    timestamp: String, //String works as well as Date object
     //image: imageSchema
 });
 

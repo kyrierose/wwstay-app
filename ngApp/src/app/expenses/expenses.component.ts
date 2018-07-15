@@ -7,7 +7,8 @@ import { CrudService } from '../crud.service';
 export interface UserData {
   _id: String,
   expense_name: String,
-  price: Number
+  price: Number,
+  timestamp: String
 };
 
 @Component({
@@ -17,7 +18,7 @@ export interface UserData {
 })
 export class ExpensesComponent implements OnInit {
 
-  displayedColumns: string[] = ['expense_name','price', 'action'];
+  displayedColumns: string[] = ['expense_name', 'price', 'timestamp', 'action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatSort) sort: MatSort;

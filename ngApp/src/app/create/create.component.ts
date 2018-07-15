@@ -24,8 +24,10 @@ export class CreateComponent implements OnInit {
   }
 
   addExpense(expense_name, price){
+    //generate date string
+    const timestamp = new Date().toUTCString();
     //updates the local expenses array
-    this.crud.addNewExpense(expense_name,price).subscribe(
+    this.crud.addNewExpense(expense_name,price, timestamp).subscribe(
       res=>{
         this.exp.setExpenseArray(res['expenses'])
         this.crud.setLoginUserData(res)

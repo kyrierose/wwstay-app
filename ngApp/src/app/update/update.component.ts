@@ -29,6 +29,7 @@ export class UpdateComponent implements OnInit {
   updateExpense(expense_name, price){
     this.expenseObject['expense_name'] = expense_name
     this.expenseObject['price'] = price
+    this.expenseObject['timestamp'] = new Date().toUTCString();
 
     this.crud.updateExpense(this.expenseObject).subscribe(
       res=>{
